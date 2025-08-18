@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f18ee0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-section {
+            background-color: black;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-section input, 
+        .form-section select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 1px solid gray;
+            background: none;
+            color: white;
+            outline: none;
+        }
+
+        .form-section input::placeholder {
+            color: gray;
+        }
+
+        .form-section button {
+            background-color: #00ff6a;
+            border: none;
+            padding: 10px 20px;
+            color: black;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .form-section button:hover {
+            background-color: #00cc55;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-section">
+        <h2>Registration info</h2>
+        <form>
+            <input type="text" placeholder="First Name" required>
+            <input type="text" placeholder="Address" required>
+            <input type="text" placeholder="Zip Code" required>
+            <select required>
+                <option value="">State</option>
+                <option value="CA">California</option>
+                <option value="TX">Texas</option>
+                <option value="NY">New York</option>
+            </select>
+            <input type="text" placeholder="Username (6-8 characters)" pattern=".{6,8}" required>
+            <input type="email" placeholder="Email" required>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

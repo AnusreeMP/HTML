@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Restoran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0f1a25;          /* dark navy */
+    --bg-soft:#172433;
+    --text:#e9f0f7;
+    --muted:#b6c2d1;
+    --brand:#ff9d2e;       /* orange */
+    --brand-2:#ff7f00;
+    --shadow:0 20px 50px rgba(0,0,0,.35);
+    --max:1200px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    margin-right: 50px;
+    margin-left: 50px;
+    color:var(--text);
+    background:white;
+    line-height:1.55;
+    font-family:'Poppins', sans-serif;
+  }
+
+  /* ---------- Navbar ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  
+  }
+
+  .nav .wrap {
+    max-width: var(--max);
+    margin: auto;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--brand);
+    margin-right: 40px;
+  }
+
+  .brand .logo {
+    width: 26px;
+    height: 20px;
+    display: inline-grid;
+    place-items: center;
+    margin-right: 8px;
+    background: var(--brand);
+    color: #111;
+    border-radius: 6px;
+  }
+
+  .nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    /* align-items: center; */
+    gap: 28px;
+ 
+  }
+
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: var(--brand);
+  }
+
+  .btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(180deg, var(--brand), var(--brand-2));
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: var(--shadow);
+  }
+  .btn:active{transform:translateY(1px)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient( rgba(15,26,37,.92) ),
+      url("hero.png") center/cover no-repeat;
+  }
+  .hero .wrap{
+    max-width:var(--max); margin:auto;
+    padding:90px 20px 110px;
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:30px; align-items:center;
+  }
+  .eyebrow{
+    font-weight:600; letter-spacing:3px; color:var(--brand); text-transform:uppercase; font-size:13px;
+  }
+  /* page inner spacing (no global animation) */
+  .page-inner {
+    margin-right: 50px;
+    margin-left: 50px;
+  }
+
+  /* animation class - apply via JS to ensure it runs on every load/refresh */
+  .wr{
+    animation: move 2s ;
+    /* will-change: transform, opacity; */
+  }
+
+  @keyframes move {
+    0% { transform: translateX(-1000px) translateZ(0);}
+    100% { transform: translateX(0) translateZ(0);  }
+  }
+
+  /* Right circular grill image card */
+  .grill {
+    justify-self:end;
+    width:min(450px);
+    aspect-ratio:1/1;
+    background:url("bg-hero.jpg") center/cover no-repeat;
+    border-radius:50%;
+    box-shadow:0 40px 120px rgba(0,0,0,.55), inset 0 0 0 10px rgba(255,255,255,.06);
+    position:relative;
+    animation: grill-spin 10s linear infinite; /* rotation */
+  }
+
+  .grill::after{
+    content:""; 
+    position:absolute; inset:-20px; border-radius:50%;
+    background:radial-gradient(closest-side, rgba(255,127,0,.18), transparent 70%);
+    pointer-events:none; filter:blur(10px);
+  }
+
+  /* Keyframes */
+  @keyframes grill-spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ---------- Small screens ---------- */
+  @media (max-width: 980px){
+    h1{font-size:46px}
+    .hero .wrap{grid-template-columns:1fr; padding:70px 18px 90px}
+    .grill{justify-self:center; order:-1; width:min(520px, 78vw); margin-top:10px}
+    .nav ul{display:none}        /* simple mobile nav (hide links) */
+  }
+
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+  }
+  .dropdown > a {
+    position: relative;
+    padding-right: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dropdown > a::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text);
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.9;
+  }
+  .dropdown-menu {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #222;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    z-index: 100;
+    padding: 8px 0;
+  }
+  .dropdown-menu a {
+    color: #fff;
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.95;
+    border-radius: 4px;
+  }
+  .dropdown-menu a:hover {
+    background: var(--brand);
+    color: #fff;
+    opacity: 1;
+  }
+  .dropdown:hover .dropdown-menu {
+    display: block !important;
+  }
+</style>
+</head>
+<body>
+
+
+  <!-- Hero -->
+  <section class="hero">
+    <header class="nav">
+      <div class="wrap">
+        <div class="brand">
+          <span class="logo">
+            <!-- fork & knife tiny SVG -->
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path d="M7 2c.55 0 1 .45 1 1v5a1 1 0 0 0 2 0V3a1 1 0 1 1 2 0v6a3 3 0 0 1-6 0V3c0-.55.45-1 1-1zm8.5 0a.5.5 0 0 1 .5.5v7.88l2.4 8.63a1 1 0 1 1-1.92.53L15 11.5V2.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+          </span>
+          Restoran
+        </div>
+
+        <ul>
+          <li><a href="#" class="active">HOME</a></li>
+          <li><a href="#">ABOUT</a></li>
+          <li><a href="#">SERVICE</a></li>
+          <li><a href="#">MENU</a></li>
+          <li  class="dropdown">
+            <a href="#">PAGES</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Gallery</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Testimonials</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </li>
+          <li><a href="#">CONTACT</a></li>
+          <li><button style="width: 150px;" class="btn">BOOK A TABLE</button></li>
+           
+        </ul>
+        <!-- <button class="btn">BOOK A TABLE</button> -->
+      </div>
+    </header>
+    <div class="wrap">
+      <div class="wr">
+        <div class="eyebrow">Welcome</div>
+        <h1>Enjoy Our<br>Delicious Meal</h1>
+        <p class="lead">
+          Tempor erat elitr rebum at clita. Diam dolor diam amet diam et eos. Clita erat ipsum et lorem et sit,
+          sed stet lorem sit clita duo justo magna dolore erat amet.
+        </p>
+        <button class="btn">BOOK A TABLE</button>
+      </div>
+
+      <div class="grill" aria-hidden="true"></div>
+    </div>
+  </section>
+
+</body>
+  <script>
+    // Trigger the slide-in animation on page load so it runs after refresh
+    document.addEventListener('DOMContentLoaded', function () {
+      var el = document.querySelector('.wr');
+      if (!el) return;
+      // Remove class if present to restart animation reliably
+      el.classList.remove('animate-move');
+      // Force reflow
+      void el.offsetWidth;
+      el.classList.add('animate-move');
+    });
+  </script>
+</html>
